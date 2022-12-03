@@ -44,3 +44,21 @@ can change the frequency and speed of obstacles inside if statment inside update
 give the player gravity 
 
 increase speed of obstracle ebery minute 
+
+there is a colour in corner of the canvas, if you hit the obstacle of that colour you get health. if you hit any other obstacle you lose health. 
+
+underwater theme 
+
+gameover function (called inside updateGamePlay). if (condition) clear interval 
+fill text you lose - button to restart game - window-reload
+ draw image method insiude compnnet class. 
+
+ resize feature
+ sound effects when you hit the obstacles and when you slide down them and when you hit the outer walls (fire on outer walls)
+
+ if spongebob meets his friends he can either gain lives or gain temporary invincibility
+
+ increase speed of spongebob
+ smash bros yaaaay sound effect when meet friend
+
+ https://www.youtube.com/watch?v=8xN_zrz4zEk&ab_channel=DEEPROT

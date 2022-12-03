@@ -6,20 +6,55 @@
               border: 10px solid orangered;
             
       }
-     
+              .page {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+              }
+              .side_panel {
+                padding: 2em 2em 2em 2em;
+                border: orangered solid 10px;
+                background-color: lightblue;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+              }
+              #highscore_container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+              #yourscorecontainer{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+              #yourscoreheading{
+                visibility: hidden;
+              }
     </style>
      <link rel="stylesheet" href="./styles/style.css"/>    
     
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>best_game_ever</title>
   </head>
-  <body>
-    <canvas width="300px" ; height="300px" id="canvas"></canvas>
-    <div>
-        <span id="my_timer">00:00</span>
+  <body class="page">
+    <canvas id="canvas"></canvas>
+    <div class="side_panel">
+        <div id="yourscorecontainer">
+          <span id="yourscoreheading">Your Score:</span>
+          <span id="my_timer">00:00</span>
+        </div> 
+        <div id="highscore_container">
+          <span id="highscore_heading">High Score</span>
+          <span id="highscore">00:00</span>
+        </div>
+        <button id="playagain" onclick="location.reload()" style="visibility:hidden;">Play Again</button>
     </div>
     <script src="scripts/script.js"></script>
+    <img id="spongebob" src="images/SPONGE.jpeg" style="display:none">
   </body>
 </html>
