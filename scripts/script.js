@@ -22,7 +22,7 @@ function start_timer() {
 
   if (sec == 59) {
     min++;
-    sec = 0;
+    sec = 0; 
     if (min < 10) {
       min = "0" + min;
     }
@@ -40,8 +40,7 @@ function start_timer() {
 }
 
 let scoresArray = [0];
-let spongebobAudio = new Audio("/module/audio/spongeDNB.wav");
-let jank = new Audio("/module/audio/jank.wav");
+let spongebobAudio = new Audio("/module/audio/spongaudio.wav");
 let crowdaww = new Audio("/module/audio/crowdaw.mp3");
 let crowdcheer = new Audio("/module/audio/applause.mp3");
 
@@ -249,7 +248,6 @@ function gameOver() {
   if (player.x + player.width < 0) {
     clearInterval(myGame.interval);
     spongebobAudio.pause();
-    jank.play();
 
     document.getElementById("playagain").style.visibility = "visible";
     document.getElementById("yourscoreheading").style.visibility = "visible";
