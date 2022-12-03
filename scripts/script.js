@@ -40,9 +40,9 @@ function start_timer() {
 }
 
 let scoresArray = [0];
-let spongebobAudio = new Audio("/module/audio/spongaudio.wav");
-let crowdaww = new Audio("/module/audio/crowdaw.mp3");
-let crowdcheer = new Audio("/module/audio/applause.mp3");
+let spongebobAudio = new Audio("/audio/spongaudio.wav");
+let crowdaww = new Audio("/audio/crowdaw.mp3");
+let crowdcheer = new Audio("/audio/applause.mp3");
 
 function formatStopclock(num) {
   let _min = Math.floor(num / 60);
