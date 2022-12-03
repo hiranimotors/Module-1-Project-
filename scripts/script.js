@@ -40,6 +40,10 @@ function start_timer() {
 }
 
 let scoresArray = [0];
+let spongebobAudio = new Audio("/module/audio/spongeDNB.wav");
+let jank = new Audio("/module/audio/jank.wav");
+let crowdaww = new Audio("/module/audio/crowdaw.mp3");
+let crowdcheer = new Audio("/module/audio/applause.mp3");
 
 function formatStopclock(num) {
   let _min = Math.floor(num / 60);
@@ -50,6 +54,7 @@ function formatStopclock(num) {
 }
 
 window.onload = function () {
+  spongebobAudio.play();
   if (typeof sessionStorage.scores !== "undefined")
     scoresArray = JSON.parse(sessionStorage.scores);
   let highestScore = scoresArray.reduce((a, b) => Math.max(a, b));
@@ -105,7 +110,7 @@ class Component {
 
 const background = new Component(canvas.width, canvas.height, "#ADD8E6", 0, 0);
 
-const player = new Component(50, 50, "yellow", 50, 110);
+const player = new Component(30, 30, "yellow", 50, 110);
 
 document.addEventListener("keydown", (e) => {
   switch (e.keyCode) {
@@ -138,7 +143,7 @@ function updateObstacles() {
     let height = Math.floor(
       Math.random() * (maxHeight - minHeight + 1) + minHeight
     );
-    let minGap = 30;
+    let minGap = 50;
     let maxGap = 200;
     let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
     topObstacles.push(new Component(15, height, "orangered", x, 0));
@@ -148,17 +153,68 @@ function updateObstacles() {
   }
 
   for (let i = 0; i < topObstacles.length; i++) {
-    topObstacles[i].x += -2.5;
-    topObstacles[i].update();
+    if (formatNumber(document.getElementById("my_timer").innerHTML) > 15) {
+      topObstacles[i].x += -4.5;
+      topObstacles[i].update();
+    } else if (
+      formatNumber(document.getElementById("my_timer").innerHTML) > 22
+    ) {
+      topObstacles[i].x += -6;
+      topObstacles[i].update();
+    } else if (
+      formatNumber(document.getElementById("my_timer").innerHTML) > 42
+    ) {
+      topObstacles[i].x += -8.5;
+      topObstacles[i].update();
+    } else {
+      topObstacles[i].x += -2.5;
+      topObstacles[i].update();
+    }
   }
   for (let i = 0; i < bottomObstacles.length; i++) {
-    bottomObstacles[i].x += -2.5;
-    bottomObstacles[i].update();
+    if (formatNumber(document.getElementById("my_timer").innerHTML) > 22) {
+      bottomObstacles[i].x += -6;
+      bottomObstacles[i].update();
+    } else if (
+      formatNumber(document.getElementById("my_timer").innerHTML) > 35
+    ) {
+      bottomObstacles[i].x += -7.5;
+      bottomObstacles[i].update();
+    } else if (
+      formatNumber(document.getElementById("my_timer").innerHTML) > 42
+    ) {
+      topObstacles[i].x += -8.5;
+      topObstacles[i].update();
+    } else {
+      bottomObstacles[i].x += -2.5;
+      bottomObstacles[i].update();
+    }
   }
 }
 
 function checkCollision() {
   topObstacles.some((obstacle) => {
+    let playerLeft = player.x;
+    let playerRight = player.x + player.width;
+    let playerTop = player.y;
+    let playerBottom = player.y + player.height;
+    let obstacleLeft = obstacle.x;
+    let obstacleRight = obstacle.x + obstacle.width;
+    let obstacleTop = obstacle.y;
+    let obstacleBottom = obstacle.y + obstacle.height;
+    if (
+      !(
+        playerBottom < obstacleTop ||
+        playerTop > obstacleBottom ||
+        playerRight < obstacleLeft ||
+        playerLeft > obstacleRight
+      )
+    ) {
+      player.x = obstacle.x - player.width;
+      player.generateImage();
+    }
+  });
+  bottomObstacles.some((obstacle) => {
     let playerLeft = player.x;
     let playerRight = player.x + player.width;
     let playerTop = player.y;
@@ -192,6 +248,8 @@ function formatNumber(str) {
 function gameOver() {
   if (player.x + player.width < 0) {
     clearInterval(myGame.interval);
+    spongebobAudio.pause();
+    jank.play();
 
     document.getElementById("playagain").style.visibility = "visible";
     document.getElementById("yourscoreheading").style.visibility = "visible";
@@ -205,6 +263,9 @@ function gameOver() {
     ) {
       document.getElementById("highscore").innerHTML =
         document.getElementById("my_timer").innerHTML;
+      crowdcheer.play();
+    } else {
+      crowdaww.play();
     }
     let score = document.getElementById("my_timer").innerHTML;
     let scoreInSeconds = formatNumber(score);

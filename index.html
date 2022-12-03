@@ -33,6 +33,9 @@
               #yourscoreheading{
                 visibility: hidden;
               }
+              .text {
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+              }
     </style>
      <link rel="stylesheet" href="./styles/style.css"/>    
     
@@ -45,12 +48,12 @@
     <canvas id="canvas"></canvas>
     <div class="side_panel">
         <div id="yourscorecontainer">
-          <span id="yourscoreheading">Your Score:</span>
-          <span id="my_timer">00:00</span>
+          <span id="yourscoreheading" class="text">Your Score:</span>
+          <span id="my_timer" class="text">00:00</span>
         </div> 
         <div id="highscore_container">
-          <span id="highscore_heading">High Score</span>
-          <span id="highscore">00:00</span>
+          <span id="highscore_heading" class="text">High Score</span>
+          <span id="highscore" class="text">00:00</span>
         </div>
         <button id="playagain" onclick="location.reload()" style="visibility:hidden;">Play Again</button>
     </div>
